@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: skylara-db-dev
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: skylara
+      MYSQL_USER: skylara
+      MYSQL_PASSWORD: skylara_password
+    ports:
+      - '3306:3306'
+    volumes:
+      - db-data-dev:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-proot']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - skylara-dev-network
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: skylara-phpmyadmin
+    environment:
+      PMA_HOST: host.docker.internal
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: ''
+      PMA_ABSOLUTE_URI: http://localhost:8080/
+    ports:
+      - '8080:80'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+  redis:
+    image: redis:7-alpine
+    container_name: skylara-redis-dev
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data-dev:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - skylara-dev-network
+
+volumes:
+  db-data-dev:
+    driver: local
+  redis-data-dev:
+    driver: local
+
+networks:
+  skylara-dev-network:
+    driver: bridge

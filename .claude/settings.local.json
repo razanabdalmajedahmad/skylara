@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(npx tsc:*)",
+      "Bash(docker start:*)",
+      "Bash(mysql -u root -e \"SELECT 1\")",
+      "Bash(mysql -u root -proot -e \"SELECT 1\")",
+      "Bash(npx prisma:*)",
+      "Bash(npx tsx:*)",
+      "Bash(curl -s http://localhost:3001/health)",
+      "Bash(npm install:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx vitest:*)",
+      "Bash(lsof -ti:3000,3001)",
+      "Bash(python3 -m json.tool)",
+      "Bash(mysql -u root skylara -e \"SELECT u.id, u.email, r.name as role_name FROM User u JOIN UserRole ur ON ur.userId = u.id JOIN Role r ON r.id = ur.roleId WHERE u.email = 'admin@skylara.dev';\")",
+      "Bash(mysql -u root skylara -e \"SHOW TABLES;\")",
+      "Bash(mysql -u root skylara -e \"SELECT u.id, u.email, r.name as role_name FROM users u JOIN user_roles ur ON ur.userId = u.id JOIN roles r ON r.id = ur.roleId WHERE u.email = 'admin@skylara.dev';\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:3001/api/manifest/aircraft)",
+      "Bash(mysql -u root skylara -e \"SELECT COUNT\\(*\\) as total_users FROM users; SELECT COUNT\\(*\\) as total_loads FROM loads; SELECT COUNT\\(*\\) as total_slots FROM slots; SELECT COUNT\\(*\\) as total_incidents FROM incidents; SELECT COUNT\\(*\\) as total_aircraft FROM aircrafts; SELECT COUNT\\(*\\) as total_dropzones FROM dropzones; SELECT COUNT\\(*\\) as total_roles FROM roles; SELECT COUNT\\(*\\) as total_transactions FROM transactions; SELECT COUNT\\(*\\) as total_wallets FROM wallets; SELECT COUNT\\(*\\) as total_gear FROM gear_items;\")",
+      "Bash(python3 -c \"import docx; print\\('python-docx available'\\)\")",
+      "Bash(pip3 install:*)",
+      "Bash(python3 -c ':*)",
+      "Bash(lsof -ti:3001)",
+      "Bash(xargs kill:*)",
+      "Bash(node -e \"console.log\\(require\\('tailwindcss/package.json'\\).version\\)\")",
+      "Bash(node -e \"console.log\\(require\\('next/package.json'\\).version\\)\")",
+      "Bash(lsof -ti:3000)",
+      "Bash(npx next:*)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(find:*)",
+      "Bash(awk '{print $1}')",
+      "Bash(xargs -I {} bash -c 'echo \"=== {} ===\" && head -20 {}')",
+      "Bash(grep -E \"\\\\.\\(tsx?|prisma\\)$\")",
+      "Bash(gtimeout 10 npx tsx apps/api/src/index.ts)",
+      "Bash(docker compose:*)",
+      "Bash(mysql -u root -e \"SHOW DATABASES LIKE 'skylara';\")",
+      "Bash(npx expo:*)"
+    ]
+  }
+}

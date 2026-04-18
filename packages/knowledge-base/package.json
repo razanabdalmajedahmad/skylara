@@ -1,0 +1,16 @@
+{
+  "name": "@skylara/knowledge-base",
+  "version": "0.1.0",
+  "description": "SkyLara Knowledge Base - Help articles, FAQs, and feature registry",
+  "private": true,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

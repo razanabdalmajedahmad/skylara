@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-navy: #1b4f72;
+  --color-sky-blue: #2e86c1;
+  --color-red: #e74c3c;
+  --color-green: #27ae60;
+
+  --status-open: #10b981;
+  --status-filling: #3b82f6;
+  --status-locked: #f59e0b;
+  --status-boarding: #f97316;
+  --status-airborne: #ef4444;
+  --status-landed: #a855f7;
+  --status-complete: #6b7280;
+  --status-cancelled: #64748b;
+
+  /* Theme variables — light */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-card: #ffffff;
+  --bg-elevated: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border-primary: #e5e7eb;
+  --border-subtle: #f3f4f6;
+}
+
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+  --bg-elevated: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-primary: #334155;
+  --border-subtle: #1e293b;
+}
+
+* {
+  @apply box-border;
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-gray-100 transition-colors duration-200;
+}
+
+.bg-gradient-navy {
+  @apply bg-gradient-to-r from-[#1b4f72] to-[#2e86c1];
+}
+
+.text-brand-navy {
+  @apply text-[#1b4f72];
+}
+
+.text-brand-sky {
+  @apply text-[#2e86c1];
+}
+
+.border-brand-navy {
+  @apply border-[#1b4f72];
+}
+
+.bg-brand-navy {
+  @apply bg-[#1b4f72];
+}
+
+.bg-brand-sky {
+  @apply bg-[#2e86c1];
+}
+
+.offline-banner {
+  @apply fixed top-0 left-0 right-0 bg-red-600 text-white py-2 px-4 text-center text-sm font-semibold z-50;
+}
+
+.slot-grid {
+  @apply grid grid-cols-2 md:grid-cols-4 gap-2;
+}
+
+.load-card {
+  @apply rounded-lg border shadow-sm hover:shadow-md transition-shadow cursor-pointer;
+}
+
+.status-badge {
+  @apply inline-block px-3 py-1 rounded-full text-sm font-semibold;
+}
+
+.status-open {
+  @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400;
+}
+
+.status-filling {
+  @apply bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400;
+}
+
+.status-locked {
+  @apply bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400;
+}
+
+.status-boarding {
+  @apply bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400;
+}
+
+.status-airborne {
+  @apply bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400;
+}
+
+.status-landed {
+  @apply bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400;
+}
+
+.status-complete {
+  @apply bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400;
+}
+
+.status-cancelled {
+  @apply bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400;
+}
+
+.cg-gauge {
+  @apply w-full h-6 rounded-full bg-gray-200 dark:bg-gray-700 relative overflow-hidden;
+}
+
+.cg-safe {
+  @apply bg-emerald-500;
+}
+
+.cg-warning {
+  @apply bg-amber-500;
+}
+
+.cg-danger {
+  @apply bg-red-500;
+}
+
+.fuel-gauge {
+  @apply w-full h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden;
+}
+
+.fuel-safe {
+  @apply bg-emerald-500;
+}
+
+.fuel-caution {
+  @apply bg-amber-500;
+}
+
+.fuel-danger {
+  @apply bg-red-500;
+}
+
+/* Smooth transitions for modals */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40 transition-opacity;
+}
+
+.modal-content {
+  @apply bg-white dark:bg-slate-800 rounded-lg shadow-xl max-h-[90vh] overflow-y-auto transition-transform;
+}
+
+.slide-panel {
+  @apply fixed right-0 top-0 bottom-0 bg-white dark:bg-slate-800 shadow-lg w-full md:w-96 z-40 transform transition-transform;
+}
+
+.slide-panel-open {
+  @apply translate-x-0;
+}
+
+.slide-panel-closed {
+  @apply translate-x-full;
+}
+
+/* Smooth theme transitions */
+*, *::before, *::after {
+  transition-property: background-color, border-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+/* Override transition for elements that shouldn't animate */
+.no-transition, .no-transition * {
+  transition: none !important;
+}

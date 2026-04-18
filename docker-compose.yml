@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: skylara-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_NAME:-skylara}
+      MYSQL_USER: ${DB_USER:-skylara}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-skylara_password}
+    ports:
+      - '3306:3306'
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p${DB_ROOT_PASSWORD:-root}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - skylara-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: skylara-redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - skylara-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: skylara-api
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: mysql://${DB_USER:-skylara}:${DB_PASSWORD:-skylara_password}@db:3306/${DB_NAME:-skylara}
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key-change-in-production}
+      PORT: 3001
+    ports:
+      - '3001:3001'
+    command: >
+      sh -c "npm run db:migrate:deploy && npm run start --workspace=@skylara/api"
+    networks:
+      - skylara-network
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: skylara-web
+    depends_on:
+      api:
+        condition: service_started
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3001}
+    ports:
+      - '3000:3000'
+    command: npm run start --workspace=@skylara/web
+    networks:
+      - skylara-network
+    restart: unless-stopped
+
+volumes:
+  db-data:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  skylara-network:
+    driver: bridge

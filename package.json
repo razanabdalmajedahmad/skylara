@@ -1,0 +1,56 @@
+{
+  "name": "skylara",
+  "version": "0.1.0",
+  "description": "SkyLara - Global OS for Skydiving & Flying Community",
+  "private": true,
+  "license": "MIT",
+  "author": "SkyLara Team",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:api": "npm run dev --workspace=@skylara/api",
+    "dev:web": "npm run dev --workspace=@skylara/web",
+    "dev:mobile": "npm run dev --workspace=@skylara/mobile",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "test": "turbo run test",
+    "db:generate": "npx prisma generate --schema=prisma/schema.prisma",
+    "db:push": "npx prisma db push --schema=prisma/schema.prisma",
+    "db:migrate": "npx prisma migrate dev --schema=prisma/schema.prisma",
+    "db:migrate:deploy": "npx prisma migrate deploy --schema=prisma/schema.prisma",
+    "db:seed": "npx tsx prisma/seed.ts",
+    "db:seed:support": "npx tsx prisma/seedSupport.ts",
+    "db:seed:all": "npx tsx prisma/seed.ts && npx tsx prisma/seedSupport.ts",
+    "db:studio": "npx prisma studio --schema=prisma/schema.prisma",
+    "db:reset": "npx prisma migrate reset --schema=prisma/schema.prisma --force",
+    "setup": "npm install && npm run db:generate && npm run db:push && npm run db:seed:all",
+    "clean": "turbo clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.0",
+    "prisma": "^5.7.0",
+    "tsx": "^4.21.0",
+    "turbo": "^2.0.0",
+    "typescript": "^5.3.3"
+  },
+  "prisma": {
+    "schema": "prisma/schema.prisma",
+    "seed": "npx tsx prisma/seed.ts"
+  },
+  "packageManager": "npm@11.11.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "optionalDependencies": {
+    "@esbuild/linux-arm64": "0.27.7"
+  },
+  "dependencies": {
+    "expo-auth-session": "~6.0.3",
+    "expo-web-browser": "~14.0.2"
+  }
+}

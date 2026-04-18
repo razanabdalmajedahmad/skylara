@@ -1,0 +1,19 @@
+{
+  "name": "@repo/config",
+  "version": "0.1.0",
+  "description": "SkyLara Shared Configuration",
+  "private": true,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/types": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

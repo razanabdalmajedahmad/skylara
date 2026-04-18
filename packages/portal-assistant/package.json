@@ -1,0 +1,19 @@
+{
+  "name": "@skylara/portal-assistant",
+  "version": "0.1.0",
+  "description": "SkyLara Portal Assistant - Pattern-matching chat engine for user support",
+  "private": true,
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@skylara/knowledge-base": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
