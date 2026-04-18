@@ -10,7 +10,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build --filter=@skylara/api --filter=@skylara/web",
     "dev": "turbo run dev",
     "dev:api": "npm run dev --workspace=@skylara/api",
     "dev:web": "npm run dev --workspace=@skylara/web",
