@@ -82,4 +82,4 @@ USER nextjs
 ENTRYPOINT ["/usr/sbin/dumb-init", "--"]
 
 # Default: start API (override per service in docker-compose)
-CMD ["sh", "-c", "npm run db:migrate:deploy && node apps/api/dist/index.js"]
+CMD ["node", "apps/api/dist/index.js"]
